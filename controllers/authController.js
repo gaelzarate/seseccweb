@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken')
 const bcryptjs = require('bcryptjs')
 const conexion = require('../database/db')
 const { promisify } = require('util')
-    //const ejemplo = require('../controllers/ejemplo');
+const mailer = require('../controllers/mailer');
 
 
 //const { use } = require('../routes/router')
@@ -90,10 +90,11 @@ exports.update = async(req, res) => {
 }
 
 exports.contactos = async(req, res) => {
+    mailer.enviacorreo(req, res);
     try {
         const name = req.body.name
         const correo = req.body.email
-        const mensaje = req.body.mensaje
+        const mensaje = req.body.message
 
 
         conexion.query('INSERT INTO contacto SET ?', { nombre: name, correo: correo, mensaje: mensaje }, (error, results) => {
@@ -103,6 +104,7 @@ exports.contactos = async(req, res) => {
         })
     } catch (error) {
         console.log('error catch')
+        res.redirect('/contacto')
     }
 }
 

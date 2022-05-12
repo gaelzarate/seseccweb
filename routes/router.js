@@ -56,7 +56,7 @@ router.get('/ejemplo2', (req, res) => {
     res.render('ejemplo2')
 })
 router.get('/ejemplo3', (req, res) => {
-    res.render('ejemplo3')
+    res.render('ejemplo5')
 })
 
 router.get('/cursos', (req, res) => {
